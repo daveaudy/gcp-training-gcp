@@ -1,19 +1,24 @@
-variable stack_count {
-  type        = number
-  default     = 2
-  description = "Amount application stacks to create"
+variable instance_count {
+  type = map(number)
+  description = "Virtual Machine instances to create"
 }
 
 variable "zone" {
-  default = "northamerica-northeast1-a"
+  type = map(string)
 }
+  # default = "northamerica-northeast1-a"
 
 variable "region" {
-  default = "northamerica-northeast1"
+  type = map(string)
 }
+  # default = "northamerica-northeast1"
 
 variable project_id {
-  type        = string
-  default     = "gcp-and-gke-training-dave-a"
+  type = map(string)
   description = "Google Project ID"
 }
+
+locals {
+  env_name = lower(terraform.workspace)
+}
+
