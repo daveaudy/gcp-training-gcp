@@ -7,14 +7,14 @@
 # # telus project
 # # export GOOGLE_APPLICATION_CREDENTIALS="C:\\Users\\T929417\\Documents\\Training\\Terraform\\gcp-key-terraform.json"
 provider "google" {
-  project     = var.project_id
-  region      = var.region
-  zone        = var.zone
+  project     = var.project_id[terraform.workspace]
+  region      = var.region[terraform.workspace]
+  zone        = var.zone[terraform.workspace]
 }
 
 resource "google_compute_instance" "vm_instance" {
-  count                     = var.stack_count
-  name                      = "emr-${count.index + 1}"
+  count                     = var.instance_count[terraform.workspace]
+  name                      = "${local.env_name}-${count.index + 1}"
   machine_type              = "e2-micro"
   hostname                  = "emr-${count.index + 1}.emrlab.ca"
   allow_stopping_for_update = true

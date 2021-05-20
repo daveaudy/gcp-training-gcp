@@ -1,8 +1,17 @@
-export GOOGLE_APPLICATION_CREDENTIALS="C:\\Users\\T929417\\Documents\\Training\\Terraform\\gcp-key-terraform.json"
+#Use below export command to setup GCP project connection parameters
+#export GOOGLE_APPLICATION_CREDENTIALS="C:\\Users\\T929417\\Documents\\Training\\gcp\\gcp-key-terraform.json"
 
 terraform init
 terraform validate
-terraform plan -out gcp.tfplan
-terraform apply "gcp.tfplan"
+terraform workspace new Development
+terraform workspace select Development
+terraform plan -out development.tfplan
+terraform apply "development.tfplan"
+
+terraform workspace new Production
+terraform workspace select Production
+terraform plan -out production.tfplan
+terraform apply "production.tfplan"
+
 terraform show
 terraform destroy
